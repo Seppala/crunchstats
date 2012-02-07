@@ -1,4 +1,7 @@
-<html>
+{% extends "base.html" %}
+
+{% block content %}
+
 	<h1>info about Smallstats</h1>
 	<table>
 		<tr>
@@ -25,3 +28,5 @@
 			<td>{{ a.acquired_month }} / {{ a.acquired_year }}
 		</tr>
 	</table>
+	
+{% endblock %}

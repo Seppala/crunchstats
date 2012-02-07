@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from settings import *
 from crunch.main import views
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -22,8 +23,18 @@ urlpatterns = patterns('',
 	
 	#Get companies 
 	#Test for a form
-	(r'^search/$', views.search),
-
+	url(r'^search/$', views.search),
+	
+	#Could be useful
+	#if settings.DEBUG:
+	#    urlpatterns += patterns('',
+	#        (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT, 'show_indexes':True}),
+	#)
+	
+	#Media urls
+	url(r'^media/(?P<path>.*)$', 'django.views.static.serve', 
+	{'document_root': settings.MEDIA_ROOT }),
+	
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

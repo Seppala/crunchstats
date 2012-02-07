@@ -1,5 +1,6 @@
-<html>
-	<body>
+{% extends "base.html" %}
+
+{% block content %}
 		
 		<h1>Companies by {{ tag }} and how much they have raised</h1>
 		<table>
@@ -34,5 +35,4 @@
 			</tr>
 		{% endfor %}
 		
-	</body>
-</html>
+{% endblock %}
