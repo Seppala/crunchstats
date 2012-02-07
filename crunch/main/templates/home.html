@@ -1,0 +1,80 @@
+<html>
+	<body>
+		<div id="crunchForm">
+			<form action="/run/" name="runCrunchForm" method="post">
+				{% csrf_token %}
+				<table width="450px">
+					<tr>
+						<td colspan="2">
+							Push the button to run all companies to db.
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="submit" value="Fetch co's to db">
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div id="crunchForm">
+			<form action="/addacq/" name="runAddAcq" method="post">
+				{% csrf_token %}
+				<table width="450px">
+					<tr>
+						<td colspan="2">
+							Push the button to add all acqs.
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="submit" value="Add all acquisitions">
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div id="crunchForm">
+			<form action="/by_tag/" name="getCosByTag" method="get">
+				{% csrf_token %}
+				<table width="450px">
+					<tr>
+						<td colspan="2">
+							Fetch companies according to tag. All companies with the string in one of the tags will be returned.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="tag">Tag</label>
+						</td>
+						<td>
+							<input type="text" name="tag" maxlength="50" size="30">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="submit" value="Fetch co's according to tag">
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<h1>Companies</h1>
+		<table>
+			<tr>
+				<th>Company Name</th><th>Description</th><th>Total Funding Raised</th>
+			</tr>
+		{% for company in companies %}
+		<tr>
+			<td>{{ company.name }}</td>
+			<td>{{ company.description}}</td>
+			<td>{{ company.total_money_raised }}</td>
+		</tr>
+		{% endfor %}
+		<form action="/search/" method="get">
+		        <input type="text" name="q">
+		        <input type="submit" value="Search">
+		    </form>
+		
+	</body>
+</html>

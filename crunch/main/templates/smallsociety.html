@@ -1,0 +1,27 @@
+<html>
+	<h1>info about Smallstats</h1>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Acquisition date</th>
+		</tr>
+		<tr>
+			<td>{{ co.name }}</td>
+			<td>{{ co.description }}</td>
+			<td>{{ co.acquisition}} / {{ co.acquisition.acquisition_year }}
+		</tr>
+	</table>
+	<h2>Getting acquisition through the view</h2>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Acquisition date</th>
+		</tr>
+		<tr>
+			<td>{{ a.price_amount }}</td>
+			<td>{{ co.description }}</td>
+			<td>{{ a.acquired_month }} / {{ a.acquired_year }}
+		</tr>
+	</table>
