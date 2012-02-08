@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from settings import *
+import settings
 from crunch.main import views
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin

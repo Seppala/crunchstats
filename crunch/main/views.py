@@ -71,7 +71,7 @@ def search(request):
     return HttpResponse(message)
     
 def addacq(request):
-	i = 3257
+	i = 24101
 	#For all the companies in the db
 	while i < len(Company.objects.all()):
 	#while i < 50:
