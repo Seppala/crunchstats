@@ -1,3 +1,4 @@
+*.pyc
 crunch/local_settings.py
 venv
 *.pyc
