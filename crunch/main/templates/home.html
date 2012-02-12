@@ -3,7 +3,7 @@
 {% block content %}
 
 		<div id="crunchForm">
-			<form action="/run/" name="runCrunchForm" method="post">
+			<form action="/run/" name="runCrunchForm" method="post" class="well">
 				{% csrf_token %}
 				<table width="450px">
 					<tr>
@@ -13,14 +13,14 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type="submit" value="Fetch co's to db">
+							<input type="submit" value="Fetch co's to db" class="btn">
 						</td>
 					</tr>
 				</table>
 			</form>
 		</div>
 		<div id="crunchForm">
-			<form action="/addacq/" name="runAddAcq" method="post">
+			<form action="/addacq/" name="runAddAcq" method="post" class="well">
 				{% csrf_token %}
 				<table width="450px">
 					<tr>
@@ -30,14 +30,14 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type="submit" value="Add all acquisitions">
+							<input type="submit" value="Add all acquisitions" class="btn">
 						</td>
 					</tr>
 				</table>
 			</form>
 		</div>
 		<div id="crunchForm">
-			<form action="/by_tag/" name="getCosByTag" method="get">
+			<form action="/by_tag/" name="getCosByTag" method="get" class="well">
 				{% csrf_token %}
 				<table width="450px">
 					<tr>
@@ -55,7 +55,7 @@
 					</tr>
 					<tr>
 						<td colspan="2">
-							<input type="submit" value="Fetch co's according to tag">
+							<input type="submit" value="Fetch co's according to tag" class="btn">
 						</td>
 					</tr>
 				</table>
