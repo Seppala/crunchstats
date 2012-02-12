@@ -12,6 +12,21 @@ from main.Db_handling import *
 import requests
 import simplejson
 
+class TestHelpers(TestCase):
+	
+	def test_dollar_strip(TestCase):
+		
+		teststring = '$198.5M'
+		
+		amount_string = dollar_strip(teststring)
+		
+		amount = int(amount_string)
+		
+		number = 198.5
+		
+		self.assertEquals(number, amount)
+		
+
 class TestCompanyModel(TestCase):
     def setUp(self):
         newco = Company()

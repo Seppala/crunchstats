@@ -1,4 +1,5 @@
 import requests
+import re
 import sys
 import simplejson
 import csv
@@ -6,6 +7,18 @@ from django.db.models.fields import FieldDoesNotExist
 from django.db import models
 from crunch.main.models import Company
 from main.models import Company, tag, ipo, financial_org, investments, funding_rounds, person, acquisition
+
+
+#strip total_money_raised into a number
+
+def dollar_strip(string):
+	
+	# Create a regex to test for any number
+	rg = re.compile('[\d,.]*')
+	
+	# 
+	amount = rg.search()
+		
 
 #Save all companies from cruncbase to db.
 def save_all():
