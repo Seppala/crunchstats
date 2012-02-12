@@ -161,10 +161,6 @@ class TestCompanyModel(TestCase):
         #[financial_org (multiple)
         #person (multiple)]
         
-        
-        
-    
-        
     def test_company_objects_are_named_as_their_name(self):
         p = Company()
         p.name = "Qestu"
@@ -205,6 +201,10 @@ class TestCompanyModel(TestCase):
         
         self.assertEquals('cash_and_stock', acq_code)
         self.assertEquals('shoretel', co.acquisition.acquiring_company.permalink)
+
+	def test_tagview(self):
+		
+		
 
 class TestHelpers(TestCase):
     

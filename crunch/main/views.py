@@ -21,7 +21,11 @@ def raised_by_tag(request):
 	
 	cos = get_by_tag(tag)
 	
-	return render_to_response('by_tag.html', {'companies': cos, 'tag': tag}, context_instance=RequestContext(request))
+	#order the company list
+	#co_sorted = sorted(cos, key=lambda d: (d['name']))
+	co_sorted = cos.sort(key=lambda x:(x['name']))
+	
+	return render_to_response('by_tag.html', {'companies': co_sorted, 'tag': tag}, context_instance=RequestContext(request))
 
 #saves all the crunchbase companies to a database.
 def save_crunchbase(request):
