@@ -9,23 +9,9 @@ from django.test import TestCase
 from main.models import Company, tag, ipo, financial_org, investments, funding_rounds, person, acquisition
 from main.helpers import *
 from main.Db_handling import *
+from main.viewthrows import *
 import requests
 import simplejson
-
-class TestHelpers(TestCase):
-	
-	def test_dollar_strip(TestCase):
-		
-		teststring = '$198.5M'
-		
-		amount_string = dollar_strip(teststring)
-		
-		amount = int(amount_string)
-		
-		number = 198.5
-		
-		self.assertEquals(number, amount)
-		
 
 class TestCompanyModel(TestCase):
     def setUp(self):
@@ -109,7 +95,23 @@ class TestCompanyModel(TestCase):
         j = fetch_json(url)
         
         name = j['name']
+
+    def test_by_tag_view(self):
+        all_cos = Company.objects.all()
+        co = all_cos[0]
         
+        co_list = []
+        
+        co_list.append(co)
+        
+        print ('Printing co_list:')
+        print co_list
+        
+        nyy_list = by_tag_view(co_list)
+        
+        print('Printing the list I got back:')
+        print nyy_list
+
     def test_creating_a_new_company_with_name_and_permalink(self):
         
         #[round_code
@@ -217,10 +219,8 @@ class TestCompanyModel(TestCase):
         self.assertEquals('cash_and_stock', acq_code)
         self.assertEquals('shoretel', co.acquisition.acquiring_company.permalink)
 
-	def test_tagview(self):
-		
-		
-
+        
+        
 class TestHelpers(TestCase):
     
     def test_csv_to_list(self):

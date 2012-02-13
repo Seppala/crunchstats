@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-
+	<h2>Controls for fetching data from crunchbase to the database</h2>
+	<h3>Use with care</3>
 		<div id="crunchForm">
 			<form action="/run/" name="runCrunchForm" method="post" class="well">
 				{% csrf_token %}
@@ -36,6 +37,7 @@
 				</table>
 			</form>
 		</div>
+	<h2>Controls for visualizing the data</h2>
 		<div id="crunchForm">
 			<form action="/by_tag/" name="getCosByTag" method="get" class="well">
 				{% csrf_token %}
@@ -61,21 +63,5 @@
 				</table>
 			</form>
 		</div>
-		<h1>Companies</h1>
-		<table>
-			<tr>
-				<th>Company Name</th><th>Description</th><th>Total Funding Raised</th>
-			</tr>
-		{% for company in companies %}
-		<tr>
-			<td>{{ company.name }}</td>
-			<td>{{ company.description}}</td>
-			<td>{{ company.total_money_raised }}</td>
-		</tr>
-		{% endfor %}
-		<form action="/search/" method="get">
-		        <input type="text" name="q">
-		        <input type="submit" value="Search" class="btn">
-		    </form>
 		
 {% endblock %}

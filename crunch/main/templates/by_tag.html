@@ -3,34 +3,36 @@
 {% block content %}
 		
 		<h1>Companies by {{ tag }} and how much they have raised</h1>
-		<table>
+		<table class="table table-striped">
 			<tr>
-				<th>Company Name</th><th>Description</th><th>Total Funding Raised</th><th>Funding dates</th><th>IPO info</th>
+				<th width="70px">Company Name</th><th width="120px">Description</th><th>Total Funding Raised</th><th>Funding dates</th><th>IPO info</th>
 			</tr>
 		{% for company in companies %}
 			<tr>
 				<td>{{ company.name }}</td>
 				<td>{{ company.description}}</td>
-				<td>{{ company.total_money_raised }}</td>
+				<td>{{ company.amount_raised }}</td>
 				<td>
-			{% if company.funding_rounds %}
-				{% for fr in company.funding_rounds.all%}
-						{{ fr.funded_year }}/ {{ fr.funded_month }},
-				{% endfor %}
+				{% if company.round_dates %}	
+					{% for r in company.round_dates %}
+						{% if r.year %}
+							{{ r.code }}: {{ r.month }}/ {{ r.year }}<br>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				
+				</td>
+				<td>
+					{% load humanize %}
+					{% if company.ipo.symbol %}
+						Symbol: {{ company.ipo.symbol }}; valuation: {{ company.ipo.valuation }} on: {{ company.ipo.month }}/{{ company.ipo.year}}
 			
-			{% endif%}
-			&nbsp;
+			{% endif %}
 			</td>
 			<td>
-			{# {% if company.ipo %} #}
-			{% for ipo in company.ipo.all %}
-						Symbol: {{ ipo.stock_symbol }}; valuation: {{ ipo.valuation_amount }} on: {{ ipo.pub_month }}/{{ ipo.pub_year}}
-			{% endfor %}
-			{# {% endif%} #}
-			&nbsp;
-			</td>
-			<td>
-				Acq. Price: {{ company.acquisition.term_code }} {{ company.acquisition.price_currency_code }} {{ company.acquisition.acquisition_month }} / {{ company.acquisition.acquisition_year }}
+			{% if company.acquisition.acquisition_amount %}
+				Acq. Price: {{ company.acquisition.acquisition_amount }} on {{ company.acquisition.month }} / {{ company.acquisition.year }}
+			{% endif %}
 			</td>
 			</tr>
 		{% endfor %}

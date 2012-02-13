@@ -20,15 +20,21 @@ def raised_by_tag(request):
 	
 	tag = request.GET['tag']
 	
+	#get all companies that include that tag. returns a list of company objects
 	cos = get_by_tag(tag)
 	
-	#co_keys = by_tag_view(cos)
+	#turn the list of company objects into a list of dicts with the required attributes
+	co_dictlist = by_tag_view(cos)
+	
+	
 	
 	#order the company list
-	#co_sorted = sorted(cos, key=lambda d: (d['name']))
+	#co_sorted = sorted(co_dictlist, key=lambda d: (d['name']))
+	co_sorted = sorted(co_dictlist, key=lambda d: (-d['ipo']['valuation'], -d['acquisition']['acquisition_amount'], 
+						-d['amount_raised'], d['name']))
 	#co_sorted = cos.sort(key=lambda x:(x['name']))
 	
-	return render_to_response('by_tag.html', {'companies': cos, 'tag': tag}, context_instance=RequestContext(request))
+	return render_to_response('by_tag.html', {'companies': co_sorted, 'tag': tag}, context_instance=RequestContext(request))
 
 #saves all the crunchbase companies to a database.
 def save_crunchbase(request):

@@ -9,16 +9,27 @@ from crunch.main.models import Company
 from main.models import Company, tag, ipo, financial_org, investments, funding_rounds, person, acquisition
 
 
-#strip total_money_raised into a number
-
-def dollar_strip(string):
+# Calculates the amount raised for a given company by iterating over funding rounds.
+def calc_amount_raised(company):
 	
-	# Create a regex to test for any number
-	rg = re.compile('[\d,.]*')
+	co = company
+	#initiate the funding
+	amount_raised = 0
 	
-	# 
-	amount = rg.search()
+	try:
 		
+		for roundi in co.funding_rounds.all():
+			
+			raised = roundi.raised_amount
+			#If the funding round was in euros we have to turn the amount into dollars:
+			if roundi.raised_currency_code == 'EUR':
+				raised = raised * 1.3
+			
+			amount_raised = amount_raised + raised
+	except:
+		pass
+
+	return amount_raised
 
 #Save all companies from cruncbase to db.
 def save_all():
