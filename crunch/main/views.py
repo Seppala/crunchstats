@@ -22,9 +22,14 @@ def raised_by_tag(request):
 	
 	#get all companies that include that tag. returns a list of company objects
 	cos = get_by_tag(tag)
+	#get all companies with the search term in the description
+	descs = get_by_desc(tag)
+	
+	#merge the two lists
+	all_cos = list(set(cos + descs))
 	
 	#turn the list of company objects into a list of dicts with the required attributes
-	co_dictlist = by_tag_view(cos)
+	co_dictlist = by_tag_view(all_cos)
 	
 	#order the company list
 	#co_sorted = sorted(co_dictlist, key=lambda d: (d['name']))
