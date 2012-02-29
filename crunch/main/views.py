@@ -13,7 +13,7 @@ def home(request):
 #returns the total money raised by companies
 def raised_by_tag(request):
 	if 'tag' in request.GET:
-		#print(request.GET['tag'])
+		
 		message ='you searched for companies with the tag: %r' % request.GET['tag']
 	else:
 		message = "you searched empty..."
@@ -26,12 +26,14 @@ def raised_by_tag(request):
 	#turn the list of company objects into a list of dicts with the required attributes
 	co_dictlist = by_tag_view(cos)
 	
-	
-	
 	#order the company list
 	#co_sorted = sorted(co_dictlist, key=lambda d: (d['name']))
-	co_sorted = sorted(co_dictlist, key=lambda d: (-d['ipo']['valuation'], -d['acquisition']['acquisition_amount'], 
-						-d['amount_raised'], d['name']))
+	try:
+		co_sorted = sorted(co_dictlist, key=lambda d: (-d['ipo']['valuation'], -d['acquisition']['acquisition_amount'], 
+							-d['amount_raised'], d['name']))
+	except:
+		co_sorted = sorted(co_dictlist, key=lambda d: (-d['acquisition']['acquisition_amount'], 
+							-d['amount_raised'], d['name']))
 	#co_sorted = cos.sort(key=lambda x:(x['name']))
 	
 	return render_to_response('by_tag.html', {'companies': co_sorted, 'tag': tag}, context_instance=RequestContext(request))

@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+<section id="tables">
 	<h2>Controls for fetching data from crunchbase to the database</h2>
 	<h3>Use with care</3>
 		<div id="crunchForm">
 			<form action="/run/" name="runCrunchForm" method="post" class="well">
 				{% csrf_token %}
-				<table width="450px">
+				<table width="450px" class="table">
 					<tr>
 						<td colspan="2">
 							Push the button to run all companies to db.
@@ -63,5 +64,5 @@
 				</table>
 			</form>
 		</div>
-		
+</section>
 {% endblock %}

@@ -110,7 +110,6 @@ def save_straight(dicta):
 
     try:
         co = Company.objects.get(permalink=p)
-        print("That company exists")
         return
     #if the company doesn't already exist, create it.
     except Company.DoesNotExist:

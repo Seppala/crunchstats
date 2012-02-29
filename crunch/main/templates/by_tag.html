@@ -3,37 +3,32 @@
 {% block content %}
 		
 		<h1>Companies by {{ tag }} and how much they have raised</h1>
-		<table class="table table-striped">
+		<table class="table-striped table-bordered" width= "940px">
 			<tr>
-				<th width="70px">Company Name</th><th width="120px">Description</th><th>Total Funding Raised</th><th>Funding dates</th><th>IPO info</th>
+				<th rowspan=2 width="10%">Company Name</th><th rowspan=2 width="30%">Description</th><th colspan = '2' width='20%'>Funding</th> 			  
+				<th colspan=3 width='30%'>IPO</th><th colspan=3 width="30%">Acquisition</th>
 			</tr>
+				
+			<tr>
+				<th>Total Amount</th><th>Dates</th><th>Ticker</th><th>Valuation</th><th>Date</th><th>Price</th><th>Date</th><th>Acquire</th>			
+			</tr>
+		{% load humanize %}
 		{% for company in companies %}
 			<tr>
 				<td>{{ company.name }}</td>
 				<td>{{ company.description}}</td>
-				<td>{{ company.amount_raised }}</td>
+				<td>{{ company.amount_raised|intcomma }}</td>
 				<td>
-				{% if company.round_dates %}	
 					{% for r in company.round_dates %}
 						{% if r.year %}
 							{{ r.code }}: {{ r.month }}/ {{ r.year }}<br>
 						{% endif %}
 					{% endfor %}
-				{% endif %}
 				
 				</td>
-				<td>
-					{% load humanize %}
-					{% if company.ipo.symbol %}
-						Symbol: {{ company.ipo.symbol }}; valuation: {{ company.ipo.valuation }} on: {{ company.ipo.month }}/{{ company.ipo.year}}
+				<td>{{ company.ipo.symbol }}</td><td>{{ company.ipo.valuation|intcomma }}</td><td>{{ company.ipo.month }}/{{ company.ipo.year}}</td>
 			
-			{% endif %}
-			</td>
-			<td>
-			{% if company.acquisition.acquisition_amount %}
-				Acq. Price: {{ company.acquisition.acquisition_amount }} on {{ company.acquisition.month }} / {{ company.acquisition.year }}
-			{% endif %}
-			</td>
+				<td>{{ company.acquisition.acquisition_amount|intcomma }}</td><td>{{ company.acquisition.month }}/{{ company.acquisition.year }}</td><td>{{ company.acquisition.acquirer }}</td>
 			</tr>
 		{% endfor %}
 		

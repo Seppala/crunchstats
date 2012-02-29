@@ -28,8 +28,6 @@ def by_tag_view(list_of_companies):
 		acquisition = {'acquisition_amount': 0}
 		
 		name = co.name
-		print('Printing co name:')
-		print(name)
 		description = co.description
 		
 		#Get total funding from helpers.py calc_amount_raised
@@ -40,7 +38,6 @@ def by_tag_view(list_of_companies):
 			for roundi in co.funding_rounds.all():
 
 				round_dates = {'code': roundi.round_code, 'month': roundi.funded_month, 'year': roundi.funded_year}
-				print(round_dates)
 		except: 
 			print('exception in round_dates in by_tag_view')
 		
@@ -48,20 +45,33 @@ def by_tag_view(list_of_companies):
 			for ipo in co.ipo.all():
 				if ipo.valuation_amount is None:
 					ipo.valuation_amount = 0
-				amount = ipo.valuation_amount
+				else:
+					amount = ipo.valuation_amount
+					
 				ipo = {'symbol': ipo.stock_symbol, 'valuation': amount , 'month': ipo.pub_month, 'year': ipo.pub_year}
 		except: 
 			print('exception in ipo in by_tag_view')
-			
+		
 		
 		try:
-			price = co.acquisition.price_amount
-		
-			if co.acquisition.price_currency_code == 'EUR':
-				price = price * 1.3
+			try:
+				acq = co.acquisition
+				print(acq)
+			except:
+				pass
+			try:
+				if acq.price_amount is None:
+					price = 0
+				else:
+					price = acq.price_amount
+					print(price)
+					if co.acquisition.price_currency_code == 'EUR':
+						price = price * 1.3
+			except:
+				print('exception in ipo in by_tag_view')
 			
-			acquisition = {'acquisition_amount': price, 'month': co.acquisition.acquisition_month, 
-							'year': co.acquisition.acquisition_year}
+			acquisition = {'acquisition_amount': price, 'month': co.acquisition.acquired_month, 
+							'year': co.acquisition.acquired_year, 'acquirer': co.acquisition.acquiring_company}
 		except: 
 			print('exception in acquisition in by_tag_view')
 		
@@ -69,7 +79,6 @@ def by_tag_view(list_of_companies):
 					'round_dates': round_dates, 'ipo': ipo, 'acquisition': acquisition}
 		
 		codict_list.append(co_dict)
-		print(codict_list)
 		
 	return codict_list
 				

@@ -1,23 +1,27 @@
-{% load humanize %}
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
+		<meta charset="utf-8">
 		<title>Crunchstats Engine</title>
+		
+		<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+		<!--[if lt IE 9]>
+		      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		    <![endif]-->
+		
+		<link href="/media/bootstrap/css/bootstrap.css" rel= "stylesheet">
+		<link href="/media/bootstrap/css/bootstrap-responsive.css" rel= "stylesheet">
+		<link href="/media">
+		<!--
 		<link rel="icon" type="image/png" href="/media/pics/favicon.ico">
 		<link rel="stylesheet/less" type="text/css" href="/media/less/bootstrap.less">
-		<script src="/media/less-1.2.1.min.js" type="text/javascript"></script>
+		<script src="/media/less-1.2.1.min.js" type="text/javascript"></script> -->
+		
 	</head>
 	<body>
-		<div class="container-fluid">
-		  <div class="row-fluid">
-		    <div class="span2">
-		      <!--Sidebar content-->
-				Check
-		    </div>
-		    <div class="span10">
+		{% load humanize %}
+		<div class="container">
 		      {% block content %}{% endblock %}
-		    </div>
-		  </div>
-		</div>
       
 		</div>
 </body>
